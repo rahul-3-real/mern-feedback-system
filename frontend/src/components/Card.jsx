@@ -19,12 +19,20 @@ const Card = ({ nextStep, formStep, formData, handleChange }) => {
           ...prevMessages,
           "Please fill in all required fields.",
         ]);
+
+        setTimeout(() => {
+          setErrorMessages([]);
+        }, 5000);
       }
       if (!isEmailValid) {
         setErrorMessages((prevMessages) => [
           ...prevMessages,
           "Please enter a valid email address.",
         ]);
+
+        setTimeout(() => {
+          setErrorMessages([]);
+        }, 5000);
       }
 
       return allFieldsFilled && isEmailValid;
@@ -109,6 +117,10 @@ const Card = ({ nextStep, formStep, formData, handleChange }) => {
           ...prevMessages,
           "Please Select all required fields.",
         ]);
+
+        setTimeout(() => {
+          setErrorMessages([]);
+        }, 5000);
       }
 
       return allFieldsFilled;
@@ -191,6 +203,10 @@ const Card = ({ nextStep, formStep, formData, handleChange }) => {
           ...prevMessages,
           "Please fill in all required fields.",
         ]);
+
+        setTimeout(() => {
+          setErrorMessages([]);
+        }, 5000);
       }
 
       return allFieldsFilled;
@@ -229,14 +245,11 @@ const Card = ({ nextStep, formStep, formData, handleChange }) => {
 
   return (
     <>
-      {errorMessages.length > 0 && (
-        <Portal classList="toaster">
-          <button>close</button>
-          {errorMessages.map((error) => (
-            <p key={error}>{error}</p>
-          ))}
-        </Portal>
-      )}
+      <Portal classList={`toaster ${errorMessages.length > 0 ? "active" : ""}`}>
+        {errorMessages.map((error) => (
+          <p key={error}>{error}</p>
+        ))}
+      </Portal>
       <div className="card">
         <div className="card-header">
           <h5 className="title">Submit Your Feedback</h5>
