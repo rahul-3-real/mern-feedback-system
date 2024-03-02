@@ -1,0 +1,212 @@
+/* Imports */
+@import url("https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Cairo:wght@200..1000&display=swap");
+
+/* Variables */
+:root {
+  --primary: #fd9600;
+
+  --danger: #ec2400;
+  --success: #05cc61;
+
+  --light: #ffffff;
+  --light-alt: #f7f7f7;
+  --dark: #1c1c1c;
+  --dark-alt: #7d7d7d;
+
+  --sans-serif: "Cairo", sans-serif;
+}
+
+/* Default */
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+  line-height: 100%;
+}
+*::selection {
+  background: var(--dark);
+  color: var(--light);
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--sans-serif);
+  background: var(--light-alt);
+  overflow: hidden;
+  position: relative;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+p,
+b,
+i,
+u,
+ul,
+ol,
+li,
+span {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+p {
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--dark-alt);
+}
+
+/* Wrapper */
+.wrapper {
+  padding: 50px 30px;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+/* Card */
+.card {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  background: var(--light);
+  box-shadow: 0 0 50px 1px #ccc3;
+  border-radius: 5px;
+  border-top: 5px solid var(--primary);
+}
+.card .card-header {
+  padding: 20px;
+  background: var(--light);
+}
+.card-body {
+  padding: 20px;
+  background: var(--light);
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.title {
+  font-size: 23px;
+  font-weight: 700;
+  color: var(--dark);
+  text-transform: capitalize;
+}
+
+.form-group {
+  display: block;
+  margin-bottom: 20px;
+}
+.form-group label {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--dark-alt);
+  display: block;
+  margin-bottom: 5px;
+}
+.form-group label span {
+  color: var(--danger);
+}
+.form-group .form-control,
+.form-group .form-select {
+  display: block;
+  width: 100%;
+  padding: 10px 15px;
+  border: 2px solid #eee;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: var(--sans-serif);
+  transition: 0.5s ease all;
+  appearance: none;
+  min-height: 50px;
+}
+.form-group .form-control:focus,
+.form-group .form-select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px #fd960040;
+}
+.form-group .form-select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  background-position: right 0.75rem center;
+  background-repeat: no-repeat;
+  background-size: 16px 12px;
+}
+
+.form-group .rating {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 10px;
+}
+.form-group .rating label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+}
+.form-group .rating label input {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.form-group .rating label img {
+  width: 30px;
+  display: block;
+  filter: grayscale(1);
+  opacity: 0.3;
+  margin-bottom: 5px;
+  transition: 0.5s ease all;
+}
+.form-group .rating label input:checked ~ img {
+  opacity: 1;
+  filter: grayscale(0);
+}
+
+.btn {
+  font-size: 14px;
+  font-weight: 700;
+  font-family: var(--sans-serif);
+  text-transform: uppercase;
+  padding: 10px 30px;
+  border: 0;
+  outline: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 50px;
+  min-width: 150px;
+  transition: 0.5s ease all;
+}
+.btn-primary {
+  background: var(--primary);
+  color: var(--dark);
+}
+.btn-primary:hover {
+  filter: saturate(0.6);
+}
