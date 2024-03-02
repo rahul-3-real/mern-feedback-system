@@ -189,13 +189,28 @@ p {
   filter: grayscale(0);
 }
 
+.fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease-in-out, height 0.3s ease-in-out;
+}
+.fieldset.active {
+  opacity: 1;
+  height: auto;
+}
+
 .btn {
   font-size: 14px;
   font-weight: 700;
   font-family: var(--sans-serif);
   text-transform: uppercase;
   padding: 10px 30px;
-  border: 0;
+  border: 1px solid;
   outline: 0;
   border-radius: 5px;
   cursor: pointer;
@@ -205,8 +220,17 @@ p {
 }
 .btn-primary {
   background: var(--primary);
+  border-color: var(--primary);
   color: var(--dark);
 }
 .btn-primary:hover {
-  filter: saturate(0.6);
+  background: transparent;
+}
+.btn-outline-primary {
+  background: transparent;
+  border-color: var(--primary);
+  color: var(--dark);
+}
+.btn-outline-primary:hover {
+  background: var(--primary);
 }

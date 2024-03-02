@@ -4,7 +4,7 @@ import Average from "../static/images/icons/average.png";
 import AboveAverage from "../static/images/icons/above-average.png";
 import Excellent from "../static/images/icons/excellent.png";
 
-export const Input = ({ id, type, name, label, required }) => {
+export const Input = ({ id, type, name, label, required, ...rest }) => {
   return (
     <div className="form-group">
       <label htmlFor="{id}">
@@ -17,12 +17,13 @@ export const Input = ({ id, type, name, label, required }) => {
         id={id}
         name={name}
         required={required ? true : false}
+        {...rest}
       />
     </div>
   );
 };
 
-export const Select = ({ id, name, label, required, options }) => {
+export const Select = ({ id, name, label, required, options, ...rest }) => {
   return (
     <div className="form-group">
       <label htmlFor={id}>
@@ -33,6 +34,7 @@ export const Select = ({ id, name, label, required, options }) => {
         name={name}
         id={id}
         required={required ? true : false}
+        {...rest}
       >
         <option value="">---</option>
         {options.map((option) => (
@@ -41,19 +43,11 @@ export const Select = ({ id, name, label, required, options }) => {
           </option>
         ))}
       </select>
-      <input
-        className="form-control"
-        type="text"
-        id="other-position"
-        placeholder="Please specify"
-        required
-        style={{ marginTop: "15px" }}
-      />
     </div>
   );
 };
 
-export const Rating = ({ id, name, label, required }) => {
+export const Rating = ({ id, name, label, required, onChange, ...rest }) => {
   const options = [
     {
       id: "poor",
@@ -95,7 +89,10 @@ export const Rating = ({ id, name, label, required }) => {
               id={`${option.id}-${id}`}
               name={name}
               value={option.value}
+              checked={rest.value === option.value}
               required={required ? true : false}
+              onChange={() => onChange({ name, value: option.value })} // Corrected invocation
+              {...rest}
             />
             <img src={option.img} alt={option.value} />
             <b>{option.value}</b>
@@ -106,7 +103,7 @@ export const Rating = ({ id, name, label, required }) => {
   );
 };
 
-export const Textarea = ({ id, name, label, required }) => {
+export const Textarea = ({ id, name, label, required, ...rest }) => {
   return (
     <div className="form-group">
       <label htmlFor={id}>
@@ -119,14 +116,15 @@ export const Textarea = ({ id, name, label, required }) => {
         id={id}
         rows="4"
         required={required ? true : false}
+        {...rest}
       ></textarea>
     </div>
   );
 };
 
-export const Button = ({ id, type, value, classList }) => {
+export const Button = ({ id, type, value, classList, ...rest }) => {
   return (
-    <button className={`btn ${classList}`} id={id} type={type}>
+    <button className={`btn ${classList}`} id={id} type={type} {...rest}>
       {value}
     </button>
   );
