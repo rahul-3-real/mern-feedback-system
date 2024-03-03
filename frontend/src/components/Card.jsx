@@ -2,12 +2,18 @@ import { useState } from "react";
 import { Button, Input, Rating, Select, Textarea } from "./Input";
 import Portal from "./Portal";
 
-const Card = ({ nextStep, formStep, formData, handleChange }) => {
+const Card = ({
+  nextStep,
+  formStep,
+  formData,
+  handleChange,
+  handleSubmitted,
+}) => {
   const [errorMessages, setErrorMessages] = useState([]);
 
   const firstStep = () => {
     const validateFirstStep = () => {
-      const requiredFields = ["name", "email", "company", "position"];
+      const requiredFields = ["name", "email", "company", "relationship"];
       const allFieldsFilled = requiredFields.every(
         (field) => !!formData[field]
       );
@@ -41,8 +47,6 @@ const Card = ({ nextStep, formStep, formData, handleChange }) => {
     const onClickHandler = () => {
       if (validateFirstStep()) {
         nextStep();
-      } else {
-        console.log(errorMessages);
       }
     };
 
@@ -79,12 +83,12 @@ const Card = ({ nextStep, formStep, formData, handleChange }) => {
         />
 
         <Select
-          id="position"
-          name="position"
+          id="relationship"
+          name="relationship"
           label="Position / Relationship"
           required
           options={["Colleague", "Employer", "Freelance Client", "Other"]}
-          value={formData.position}
+          value={formData.relationship}
           onChange={handleChange}
         />
 
@@ -101,11 +105,11 @@ const Card = ({ nextStep, formStep, formData, handleChange }) => {
   const secondStep = () => {
     const validateSecondStep = () => {
       const requiredFields = [
-        "communication",
+        "communicationSkills",
         "teamwork",
         "leadership",
         "adaptability",
-        "overall",
+        "overallSatisfaction",
       ];
       const allFieldsFilled = requiredFields.every(
         (field) => !!formData[field]
@@ -129,18 +133,17 @@ const Card = ({ nextStep, formStep, formData, handleChange }) => {
     const onClickHandler = () => {
       if (validateSecondStep()) {
         nextStep();
-      } else {
-        console.log(errorMessages);
       }
     };
+
     return (
       <fieldset className={`fieldset ${formStep === 2 ? "active" : ""}`}>
         <Rating
-          id="communication"
-          name="communication"
+          id="communicationSkills"
+          name="communicationSkills"
           label="Communication Skills"
           required
-          value={formData.communication}
+          value={formData.communicationSkills}
           onChange={handleChange}
         />
 
@@ -172,11 +175,11 @@ const Card = ({ nextStep, formStep, formData, handleChange }) => {
         />
 
         <Rating
-          id="overall"
-          name="overall"
+          id="overallSatisfaction"
+          name="overallSatisfaction"
           label="Overall, how satisfied are you with the performance?"
           required
-          value={formData.overall}
+          value={formData.overallSatisfaction}
           onChange={handleChange}
         />
 
@@ -192,7 +195,7 @@ const Card = ({ nextStep, formStep, formData, handleChange }) => {
 
   const thirdStep = () => {
     const validateThirdStep = () => {
-      const requiredFields = ["comment"];
+      const requiredFields = ["comments"];
       const allFieldsFilled = requiredFields.every(
         (field) => !!formData[field]
       );
@@ -213,22 +216,44 @@ const Card = ({ nextStep, formStep, formData, handleChange }) => {
     };
 
     const onClickHandler = () => {
-      console.log("123");
+      const saveData = async () => {
+        try {
+          const url = `http://localhost:3001/api/submit-feedback`;
+          const options = {
+            method: "post",
+            headers: {
+              Accept: "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+          };
+
+          const response = await fetch(url, options);
+
+          if (response.ok) {
+            await response.json();
+            handleSubmitted();
+          } else {
+            console.error("Failed to post feedback");
+          }
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      };
+
       if (validateThirdStep()) {
-        console.log(formData);
-      } else {
-        console.log(errorMessages);
+        saveData();
       }
     };
 
     return (
       <fieldset className={`fieldset ${formStep === 3 ? "active" : ""}`}>
         <Textarea
-          id="comment"
-          name="comment"
+          id="comments"
+          name="comments"
           label="Comments or Suggestions"
           required
-          value={formData.comment}
+          value={formData.comments}
           onChange={handleChange}
         />
 
@@ -256,15 +281,14 @@ const Card = ({ nextStep, formStep, formData, handleChange }) => {
         </div>
         <div className="card-body">
           <form method="POST">
-            {/* {formStep === 1 && firstStep()}
-          {formStep === 2 && secondStep()}
-          {formStep === 3 && thirdStep()} */}
-            {firstStep()}
+            {formStep === 1 && firstStep()}
+            {formStep === 2 && secondStep()}
+            {formStep === 3 && thirdStep()}
+            {/* {firstStep()}
             {secondStep()}
-            {thirdStep()}
+            {thirdStep()} */}
           </form>
         </div>
-        <div className="card-footer"></div>
       </div>
     </>
   );

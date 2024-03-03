@@ -237,7 +237,7 @@ p {
 
 .toaster {
   position: fixed;
-  top: 30px;
+  bottom: 30px;
   right: -500px;
   z-index: 1;
   padding: 20px;
@@ -258,4 +258,56 @@ p {
 }
 .toaster p:last-child {
   margin-bottom: 0;
+}
+
+.success .card-body {
+  border: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 30px;
+}
+.success img {
+  margin: 0 auto 20px;
+  width: 70px;
+}
+.success .title {
+  margin-bottom: 20px;
+}
+.success p {
+  line-height: 130%;
+}
+
+@media (max-width: 600px) {
+  .title {
+    font-size: 18px;
+  }
+  .form-group label {
+    font-size: 14px;
+  }
+  .form-group .rating {
+    gap: 15px;
+  }
+  .form-group .rating label {
+    padding: 5px;
+    font-size: 7px;
+  }
+  .form-group .rating label img {
+    width: 20px;
+  }
+  .form-group .form-control,
+  .form-group .form-select {
+    min-height: 38px;
+    height: 38px;
+  }
+  .form-group textarea.form-control {
+    height: auto;
+  }
+  .btn {
+    min-height: 38px;
+    height: auto;
+  }
+  .success .card-body {
+    display: block;
+  }
 }

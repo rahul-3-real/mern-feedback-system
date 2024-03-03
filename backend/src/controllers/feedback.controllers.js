@@ -49,15 +49,6 @@ export const submitFeedback = async (req, res) => {
       comments,
     });
 
-    // Validate email uniqueness
-    const existingFeedback = await Feedback.findOne({ email });
-    if (existingFeedback) {
-      return res.status(400).json({
-        success: false,
-        error: "Feedback with this email already exist!",
-      });
-    }
-
     // Save the feedback to the database
     const savedFeedback = await newFeedback.save();
 

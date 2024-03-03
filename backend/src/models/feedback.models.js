@@ -16,7 +16,6 @@ const feedbackSchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
-      unique: true,
     },
     company: {
       type: String,
@@ -25,16 +24,8 @@ const feedbackSchema = new mongoose.Schema(
 
     // Position/Relationship Information
     relationship: {
-      type: {
-        category: {
-          type: String,
-          enum: ["Colleague", "Employer", "Freelance Client", "Other"],
-          required: true,
-        },
-        customText: {
-          type: String,
-        },
-      },
+      type: String,
+      enum: ["Colleague", "Employer", "Freelance Client", "Other"],
       required: true,
     },
 

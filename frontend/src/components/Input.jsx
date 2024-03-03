@@ -51,28 +51,33 @@ export const Rating = ({ id, name, label, required, onChange, ...rest }) => {
   const options = [
     {
       id: "poor",
-      value: "Poor",
+      value: 1,
       img: Poor,
+      text: "Poor",
     },
     {
       id: "below-avg",
-      value: "Below Average",
+      value: 2,
       img: BelowAverage,
+      text: "Below Average",
     },
     {
       id: "avg",
-      value: "Average",
+      value: 3,
       img: Average,
+      text: "Average",
     },
     {
       id: "above-avg",
-      value: "Above Average",
+      value: 4,
       img: AboveAverage,
+      text: "Above Average",
     },
     {
       id: "excellent",
-      value: "Excellent",
+      value: 5,
       img: Excellent,
+      text: "Excellent",
     },
   ];
 
@@ -95,7 +100,7 @@ export const Rating = ({ id, name, label, required, onChange, ...rest }) => {
               {...rest}
             />
             <img src={option.img} alt={option.value} />
-            <b>{option.value}</b>
+            <b>{option.text}</b>
           </label>
         ))}
       </div>
