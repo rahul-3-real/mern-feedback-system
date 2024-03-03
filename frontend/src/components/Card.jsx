@@ -218,7 +218,7 @@ const Card = ({
     const onClickHandler = () => {
       const saveData = async () => {
         try {
-          const url = `http://localhost:3001/api/submit-feedback`;
+          const url = import.meta.env.VITE_URL;
           const options = {
             method: "post",
             headers: {

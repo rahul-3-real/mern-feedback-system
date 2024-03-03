@@ -6,7 +6,13 @@ import FeedbackRouter from "../routes/feedback.routes.js";
 const app = express();
 
 // Middleware configuration
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.CORS_ORIGIN,
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
