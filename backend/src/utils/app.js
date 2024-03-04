@@ -18,5 +18,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use("/api", FeedbackRouter);
+app.get("/", (req, res) => {
+  res.json({ message: "OK" });
+});
 
 export default app;
